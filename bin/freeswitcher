@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'eventmachine'
-require File.join(File.dirname(__FILE__), "..", 'lib', 'event')
+require File.join(File.dirname(__FILE__), "..", 'lib', 'fsr', 'event')
 require 'pp'
 require 'yaml'
 CONFIG = YAML::load(File.read(File.join(File.dirname(__FILE__), "..", "config.yaml"))) #Reads in YAML config file
@@ -11,13 +11,13 @@ module FreeSwitcher
 
   module Client
     def post_init
-      say('auth ClueCon')
+      say("auth #{CONFIG['settings']['inbound']['password']}")
       say('event plain ALL')
     end
 
     def receive_data(data)
       Server.broadcast(data)
-      pp event = Event.from(data)
+      pp event = FSR::Event.from(data)
     end
 
     def say(line)
