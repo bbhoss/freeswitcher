@@ -6,7 +6,9 @@ describe "Testing FSR module loading methods" do
   it "Loads all applications" do
     apps_loaded = FSR.load_all_applications
     apps_loaded.kind_of?(Array).should == true
-    apps_loaded.should == [:conference, :bridge, :fifo]
+    apps_loaded.include?(:conference).should == true
+    apps_loaded.include?(:bridge).should == true
+    apps_loaded.include?(:fifo).should == true
   end
 
   # When you add commands  you must modify the expected cmds_loaded behavior
