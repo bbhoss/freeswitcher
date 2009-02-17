@@ -1,5 +1,6 @@
 require "fsr/event_socket"
 require "fsr/cmd"
+require 'yaml'
 CONFIG = YAML::load(File.read(File.join(File.dirname(__FILE__), "../../", "config.yaml")))
 module FSR
   class CommandSocket < EventSocket

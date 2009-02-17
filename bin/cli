@@ -1,0 +1,27 @@
+puts 'Starting Freeswitcher Command Shell'
+require "irb"
+require File.join(File.dirname(__FILE__), "..", 'lib', 'fsr')
+# Tab completion
+require 'irb/completion'
+#IRB.conf[:USE_READLINE] = true
+
+commands = FSR.load_all_commands
+puts "Attempting connection to #{CONFIG['settings']['inbound']['host']}:#{CONFIG['settings']['inbound']['port']}"
+@sock = FSR::CommandSocket.new
+puts "You have these commands avaliable: \n"
+puts '*'*80
+commands.each do |command|
+  puts command.to_s.gsub(':','')
+end
+puts '*'*80
+
+if __FILE__ == $0
+  IRB.start(__FILE__)
+else
+  # check -e option
+  if /^-e$/ =~ $0
+    IRB.start(__FILE__)
+  else
+    IRB.setup(__FILE__)
+  end
+end

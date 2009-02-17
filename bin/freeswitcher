@@ -4,6 +4,7 @@ require 'rubygems'
 require 'eventmachine'
 require File.join(File.dirname(__FILE__), "..", 'lib', 'event')
 require 'pp'
+require 'yaml'
 CONFIG = YAML::load(File.read(File.join(File.dirname(__FILE__), "..", "config.yaml"))) #Reads in YAML config file
 
 module FreeSwitcher
