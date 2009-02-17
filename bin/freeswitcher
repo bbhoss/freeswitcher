@@ -4,6 +4,7 @@ require 'rubygems'
 require 'eventmachine'
 require File.join(File.dirname(__FILE__), "..", 'lib', 'event')
 require 'pp'
+CONFIG = YAML::load(File.read(File.join(File.dirname(__FILE__), "..", "config.yaml"))) #Reads in YAML config file
 
 module FreeSwitcher
 
@@ -41,6 +42,6 @@ module FreeSwitcher
 end
 
 EM.run do
-  EventMachine::connect("localhost", 8021, FreeSwitcher::Client)
-  EventMachine::start_server("localhost", 9000, FreeSwitcher::Server)
+  EventMachine::connect(CONFIG['settings']['inbound']['host'], CONFIG['settings']['inbound']['port'], FreeSwitcher::Client)
+  EventMachine::start_server(CONFIG['settings']['outbound']['bindip'], CONFIG['settings']['outbound']['bindport'], FreeSwitcher::Server)
 end

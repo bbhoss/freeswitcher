@@ -1,0 +1,14 @@
+---
+#Default settings for stock FreeSwitch, be sure to change these if you're not testing!
+settings:
+    
+    #Settings for the inbound event socket
+    inbound:
+        host: 127.0.0.1 #IP Address of the FS Box
+        port: 8021 #Port running the event socket on the FS Box
+        password: ClueCon #Password to authenticate with the event socket, be sure to change this later!    
+        
+    #Settings for outbound event socket    
+    outbound:
+        bindip: 127.0.0.1 #IP on THIS machine, that you want to listen for FS's outbound events
+        bindport: 9000 #Port number on THIS machine to listen on

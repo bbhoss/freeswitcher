@@ -1,13 +1,14 @@
 require "fsr/event_socket"
 require "fsr/cmd"
+CONFIG = YAML::load(File.read(File.join(File.dirname(__FILE__), "../../", "config.yaml")))
 module FSR
   class CommandSocket < EventSocket
     include Cmd
 
     def initialize(args = {})
-      @server = args[:server] || "127.0.0.1"
-      @port = args[:port] || "8021"
-      @auth = args[:auth] || "ClueCon"
+      @server = args[:server] || CONFIG['settings']['inbound']['host']
+      @port = args[:port] || CONFIG['settings']['inbound']['port']
+      @auth = args[:auth] || CONFIG['settings']['inbound']['password']
       @socket = TCPSocket.new(@server, @port)
       super(@socket)
       unless login
